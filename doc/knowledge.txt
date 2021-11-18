@@ -1,0 +1,79 @@
+P(A∪B)与P(AB)的区别主要在于概念不同。
+
+随机事件A∪B称为A和B的和事件，它表示随机事件A或随机事件B中至少有一个发生；随机事件A∩B称为A和B的积事件，它表示随机事件A和随机事件B同时发生，通常地，我们把A∩B简写为AB。
+
+所以，P(A∪B)表示随机事件A或随机事件B中至少有一个发生的概率，P(AB)表示随机事件A和随机事件B同时发生的概率。
+
+运算
+
+1、交换律：A∪B=B∪A、AB=BA。
+
+2、结合律：( A∪B )∪C=A∪( B∪C )。
+
+3、分配律：A∪( BC )=( A∪B )( A∪C )、A( B∪C )=( AB )∪( AC )。
+
+4、 摩根律：A B=A∪B、A ∪ B=A B。
+在随机事件中，有许多事件，而这些事件之中又有联系，分析事件之间的关系，可以帮助我们更加深刻地认识随机事件；给出的事件的运算及运算规律，有助于我们讨论复杂事件。
+
+概率基本
+https://blog.csdn.net/baishuiniyaonulia/article/details/82555956
+
+概率论04 随机变量
+https://www.cnblogs.com/vamei/p/3196828.html
+
+贝叶斯基本定理
+
+https://blog.csdn.net/jiangjiang_jian/article/details/81346797
+
+
+随机变量概念
+表示随机现象（在一定条件下，并不总是出现相同结果的现象称为随机现象）各种结果的变量（一切可能的样本点）。例如某一时间内公共汽车站等车乘客人数，电话交换台在一定时间内收到的呼叫次数等等，都是随机变量的实例。
+　　一个随机试验的可能结果（称为基本事件）的全体组成一个基本空间Ω 。 随机变量X是定义在基本空间Ω上的取值为实数的函数，即基本空间Ω中每一个点，也就是每个基本事件都有实轴上的点与之对应。例如，随机投掷一枚硬币 ，可能的结果有正面朝上 ，反面朝上两种 ，若定义X为投掷一枚硬币时正面朝上的次数 ， 则X为一随机变量，当正面朝上时，X取值1；当反面朝上时，X取值0。又如，掷一颗骰子 ，它的所有可能结果是出现1点、2点、3点、4点、5点和6点 ，若定义X为掷一颗骰子时出现的点数，则X为一随机变量，出现1，2，3，4，5，6点时X分别取值1，2，3，4，5，6。
+　　要全面了解一个随机变量，不但要知道它取哪些值，而且要知道它取这些值的规律，即要掌握它的概率分布。概率分布可以由分布函数刻画。若知道一个随机变量的分布函数，则它取任何值和它落入某个数值区间内的概率都可以求出。
+　　有些随机现象需要同时用多个随机变量来描述。例如 ，子弹着点的位置需要两个坐标才能确定，它是一个二维随机变量。类似地，需要n个随机变量来描述的随机现象中，这n个随机变量组成n维随机向量 。描述随机向量的取值规律 ，用联合分布函数。随机向量中每个随机变量的分布函数，称为边缘分布函数。若联合分布函数等于边缘分布函数的乘积 ，则称这些单个随机变量之间是相互独立的。独立性是概率论所独有的一个重要概念。
+　　random variable
+　　在不同的条件下由于偶然因素影响，其可能取各种不同的值，具有不确定性和随机性，但这些取值落在某个范围的概率是一定的，此种变量称为随机变量。随机变量可以是离散型的，也可以是连续型的。如分析测试中的测定值就是一个以概率取值的随机变量，被测定量的取值可能在某一范围内随机变化，具体取什么值在测定之前是无法确定的，但测定的结果是确定的，多次重复测定所得到的测定值具有统计规律性。随机变量与模糊变量的不确定性的本质差别在于，后者的测定结果仍具有不确定性，即模糊性。
+　　
+　　
+概率密度函数（PDF）
+In probability theory, a probability density function (PDF), or density of a continuous random variable, is a function whose value at any given sample (or point) in the sample space (the set of possible values taken by the random variable) can be interpreted as providing a relative likelihood that the value of the random variable would equal that sample.[2] In other words, while the absolute likelihood for a continuous random variable to take on any particular value is 0 (since there is an infinite set of possible values to begin with), the value of the PDF at two different samples can be used to infer, in any particular draw of the random variable, how much more likely it is that the random variable would equal one sample compared to the other sample.
+在概率论中，概率密度函数（PDF）或连续随机变量的密度是一个函数，其在样本空间（随机变量可能取值的集合）中任何给定样本（或点）的值可以被解释为提供随机变量的值等于该样本的相对可能性。 [2]换句话说，虽然连续随机变量取任何特定值的绝对可能性是0（因为一开始就有一个无限的可能值集），但在两个不同样本的PDF值可以用来推断，在随机变量的任何特定抽样中，随机变量等于一个样本的可能性比另一个样本大多少。简单来讲，概率密度函数，就是样本点为横坐标，样本点的可能性为纵坐标，的函数。
+
+
+概率密度函数
+https://www.cnblogs.com/wjy-lulu/p/7767712.html
+
+https://zhuanlan.zhihu.com/p/48140593
+
+
+微分
+设函数y = f(x)在x的邻域内有定义，x及x + Δx在此区间内。如果函数的增量Δy = f(x + Δx) - f(x)可表示为 Δy = AΔx + o(Δx)（其中A是不随Δx改变的常量，但A可以随x改变），而o(Δx)是比Δx高阶的无穷小（注：o读作奥密克戎，希腊字母）那么称函数f(x)在点x是可微的，且AΔx称作函数在点x相应于因变量增量Δy的微分，记作dy，即dy = AΔx。
+https://baike.baidu.com/item/%E5%BE%AE%E5%88%86/317988?fr=aladdin
+
+
+切线几何意义
+https://www.zhihu.com/question/317987526/answer/894580702?ivk_sa=1024320u
+
+微分的几何意义
+https://www.cnblogs.com/huvjie/p/15135745.html
+
+定积分
+https://baike.baidu.com/item/%E5%AE%9A%E7%A7%AF%E5%88%86/7128801?fr=aladdin
+积分
+https://baike.baidu.com/item/%E7%A7%AF%E5%88%86/5749068?fr=aladdin
+
+
+似然函数
+https://zh.wikipedia.org/wiki/%E4%BC%BC%E7%84%B6%E5%87%BD%E6%95%B0
+
+逻辑回归模型
+https://zhuanlan.zhihu.com/p/74874291
+
+Sigmoid函数
+https://blog.csdn.net/saltriver/article/details/57531963
+
+导函数
+https://www.sohu.com/a/276931586_120007351
+
+
+

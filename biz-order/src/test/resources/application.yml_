@@ -1,0 +1,21 @@
+server:
+  port: 8086
+  contextPath: /
+  
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka/
+#spring:
+#  application:
+#    name: eureka-client-01
+
+security:
+  oauth2:
+    client:
+      client-id: client-order
+      client-secret: 123456
+      access-token-uri: http://localhost:5000/oauth/token
+      user-authorization-uri: http://localhost:5000/oauth/authorize
+    resource:
+      user-info-uri: http://localhost:5000/user

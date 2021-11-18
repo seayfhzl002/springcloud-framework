@@ -1,0 +1,19 @@
+server:
+  port: 5000
+  servlet:
+    context-path: /auth
+    
+spring:
+  application:
+    name: auth-server
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: @nacos.discovery.server-addr@
+        namespace: @nacos.discovery.namespace@
+      config:
+        server-addr: @nacos.config.server-addr@
+        file-extension: yml
+        shared-dataids: application-redis,authorization-server

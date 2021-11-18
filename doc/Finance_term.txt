@@ -1,0 +1,6 @@
+Exposure at default(EAD) 违约敞口
+是指由于债务人的违约所导致的可能承受风险的信贷业务的余额。
+
+Probability of Default(PD) 违约率
+是指借款人在未来一段时期内发生违约的可能性
+

@@ -1,0 +1,20 @@
+server:
+  port: 9999
+
+spring:
+  application:
+    name: @artifactId@
+  profiles:
+    active: @profiles.active@
+  cloud:
+    nacos:
+      discovery:
+        #server-addr: @nacos.discovery.server-addr@
+        #namespace: @nacos.discovery.namespace@
+        server-addr: 192.168.1.56
+        namespace: 24384506-b2bf-4fbe-a9cb-986c4911fac0
+      config:
+        #server-addr: @nacos.config.server-addr@
+        server-addr: 192.168.1.56
+        file-extension: yml
+        shared-dataids: application.${spring.cloud.nacos.config.file-extension},application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}

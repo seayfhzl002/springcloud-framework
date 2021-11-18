@@ -1,0 +1,18 @@
+server:
+  port: 8086
+  servlet:
+    context-path: /biz-order
+
+spring:
+  application:
+    name: biz-order
+
+security:
+  oauth2:
+    client:
+      client-id: client-check-token
+      client-secret: 123456
+      access-token-uri: http://localhost:5000/oauth/token
+      user-authorization-uri: http://localhost:5000/oauth/authorize
+    resource:
+      token-info-uri: http://localhost:5000/auth/oauth/check_token
