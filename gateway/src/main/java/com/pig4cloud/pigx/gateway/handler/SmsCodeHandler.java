@@ -1,3 +1,5 @@
+
+/*
 package com.pig4cloud.pigx.gateway.handler;
 
 import cn.hutool.core.util.RandomUtil;
@@ -29,11 +31,13 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+*/
 /**
  * @author
  * @date 2018/7/5
  * 验证码生成逻辑处理类
- */
+ *//*
+
 @Slf4j
 @Component
 @AllArgsConstructor
@@ -146,3 +150,4 @@ public class SmsCodeHandler implements HandlerFunction<ServerResponse> {
 		return strret;
 	}
 }
+*/

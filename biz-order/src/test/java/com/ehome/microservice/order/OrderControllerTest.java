@@ -9,8 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.ehome.microservice.Application;
-import com.ehome.microservice.common.test.auth.OauthClient;
-import com.ehome.microservice.common.test.auth.OauthTOkenEntity;
+import com.ehome.fintech.common.test.auth.OauthClient;
+import com.ehome.fintech.common.test.auth.OauthTOkenEntity;
 import com.meterware.httpunit.GetMethodWebRequest;
 import com.meterware.httpunit.WebConversation;
 import com.meterware.httpunit.WebRequest;

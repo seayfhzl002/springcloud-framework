@@ -1,6 +1,20 @@
+server:
+  port: 8085
+  servlet:
+    context-path: /biz-user
+
 spring:
   application:
-    name: eureka-client-01
-  cloud: 
-    config:
-      uri: http://localhost:8888
+    name: biz-user
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.1.56:8848
+        namespace: c0077cb0-e4fc-434c-aed5-5672b64b2993
+      config:
+        server-addr: 192.168.1.56:8848
+        namespace: c0077cb0-e4fc-434c-aed5-5672b64b2993
+        file-extension: yml
+        shared-dataids: application-user

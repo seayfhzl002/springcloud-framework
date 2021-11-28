@@ -1,3 +1,4 @@
+/*
 package com.pig4cloud.pigx.gateway.filter;
 
 import cn.hutool.core.util.StrUtil;
@@ -25,11 +26,14 @@ import reactor.core.publisher.Mono;
 
 import java.net.URLEncoder;
 
+*/
 /**
  * @author
  * @date 2018/7/4
  * 短信验证码处理
  */
+/*
+
 @Slf4j
 @Component
 @AllArgsConstructor
@@ -78,11 +82,13 @@ public class ValidateSmsCodeGatewayFilter extends AbstractGatewayFilterFactory {
 		};
 	}
 
-	/**
+	*/
+/**
 	 * 检查短信code
 	 *
 	 * @param request
-	 */
+	 *//*
+
 	@SneakyThrows
 	private void checkCode(ServerHttpRequest request) {
 		String language = request.getHeaders().getFirst("Accept-Language");
@@ -133,3 +139,4 @@ public class ValidateSmsCodeGatewayFilter extends AbstractGatewayFilterFactory {
 
 
 }
+*/

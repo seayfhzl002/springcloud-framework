@@ -3,7 +3,9 @@ package com.ehome.microservice.user;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.ehome.fintec.p2plending.common.dto.UserInfoDTO;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,11 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value="/users")
 public class UserController {
 
-	@RequestMapping(value="/user-names", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value="/auth/userName/{userName}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 //	@PreAuthorize("hasAuthority('ROLE_USER')")
-	public Map<String, Object> getUserName(){
-		Map<String, Object> ret = new HashMap<>();
-		ret.put("userName", "nick");
-		return ret;
+	public UserInfoDTO authByUserName(@PathVariable("userName") String userName){
+		UserInfoDTO userInfo = UserInfoDTO.builder().userId(1000L).userName("testuser").build();
+		return userInfo;
 	}
 }

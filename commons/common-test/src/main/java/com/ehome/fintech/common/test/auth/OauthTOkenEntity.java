@@ -1,4 +1,4 @@
-package com.ehome.microservice.common.test.auth;
+package com.ehome.fintech.common.test.auth;
 
 import lombok.Data;
 

@@ -1,9 +1,6 @@
 package com.ehome.microservice.auth;
 
-import java.io.ByteArrayInputStream;
 import java.nio.charset.Charset;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,17 +10,12 @@ import org.junit.platform.commons.util.StringUtils;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.ehome.microservice.Application;
-import com.ehome.microservice.common.test.auth.OauthClient;
-import com.ehome.microservice.common.test.auth.OauthTOkenEntity;
-import com.ehome.test.ControllerJunitBase;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.ehome.microservice.AuthApplication;
+import com.ehome.fintech.common.test.auth.OauthClient;
+import com.ehome.fintech.common.test.auth.OauthTOkenEntity;
 import com.meterware.httpunit.GetMethodWebRequest;
-import com.meterware.httpunit.HttpException;
 import com.meterware.httpunit.PostMethodWebRequest;
 import com.meterware.httpunit.WebConversation;
 import com.meterware.httpunit.WebForm;
@@ -35,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes=Application.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes= AuthApplication.class)
 public class AuthenticateWithAuthorizeTest extends OauthClient{
 
 	@LocalServerPort

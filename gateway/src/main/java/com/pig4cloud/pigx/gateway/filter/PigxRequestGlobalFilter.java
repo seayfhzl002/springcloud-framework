@@ -2,6 +2,8 @@ package com.pig4cloud.pigx.gateway.filter;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
+import com.ehome.fintec.p2plending.common.api.RemoteIPLimitService;
+import com.ehome.fintec.p2plending.common.api.RemoteUserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pig4cloud.pigx.common.core.constant.CommonConstants;
@@ -11,8 +13,6 @@ import com.pig4cloud.pigx.common.core.exception.ErrorCode;
 import com.pig4cloud.pigx.common.core.exception.ValidateCodeException;
 import com.pig4cloud.pigx.common.core.util.*;
 import com.pig4cloud.pigx.gateway.config.FilterIgnorePropertiesConfig;
-import com.pig4cloud.pigx.gateway.feign.RemoteUserService;
-import com.pig4cloud.pigx.gateway.feign.RemoteIPLimitService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -47,8 +47,8 @@ import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.a
 @Slf4j
 @Component
 public class PigxRequestGlobalFilter implements GlobalFilter, Ordered {
-	@Autowired
-	private RemoteIPLimitService remoteIPLimitService;
+	/*@Autowired
+	private RemoteIPLimitService remoteIPLimitService;*/
 
 	@Autowired
 	private RemoteUserService userService;
@@ -81,7 +81,8 @@ public class PigxRequestGlobalFilter implements GlobalFilter, Ordered {
 			.build();
 
 		try{
-			String userName = parseUserNameFromReq(request);
+//			String userName = parseUserNameFromReq(request);
+			String userName = null;
 			if(StrUtil.isEmpty(userName) || !userName.contains(KEY_QUERY_PARAM_ADMIN)){
 				String remoteIP = IpUtils.getIpAddress(request);
 				String reqUrl = request.getURI().getRawPath();
@@ -89,7 +90,7 @@ public class PigxRequestGlobalFilter implements GlobalFilter, Ordered {
 				log.info("remote ip {} is valid, request {}", remoteIP, reqUrl);
 			}
 			if (StrUtil.containsAnyIgnoreCase(request.getURI().getPath(), SecurityConstants.OAUTH_TOKEN_URL)) {
-				checkCode(request);
+//				checkCode(request);
 			}
 		}catch(Exception e){
 			ServerHttpResponse response = exchange.getResponse();
@@ -128,20 +129,20 @@ public class PigxRequestGlobalFilter implements GlobalFilter, Ordered {
 		if(isBackground){
 			rangeType = CommonConstants.BALCK_LIST_RANGE_TYPE_BACKGROUND;
 		}
-		boolean isValidIP = remoteIPLimitService.isValidIP(SecurityConstants.FROM_IN,rangeType, remoteIP);
+		/*boolean isValidIP = remoteIPLimitService.isValidIP(SecurityConstants.FROM_IN,rangeType, remoteIP);
 		if(!isValidIP){
 			log.error("invalid ip {}", remoteIP);
 			String language = request.getHeaders().getFirst("Accept-Language");
 			throw new BizException(I18nMessageUtil.getMessage(language,ErrorCode.TP_UPMS_BLACKLIST_IP_RESTRICTED.getMessage(),""));
-		}
+		}*/
 	}
 
 	/**
 	 * 检查谷歌验证码
 	 *
-	 * @param request
+	 * @param
 	 */
-	private void checkCode(ServerHttpRequest request) throws Exception{
+	/*private void checkCode(ServerHttpRequest request) throws Exception{
 		try {
 			//只有登录才会有clientId，但是所有的请求都需要检测验证码，所以对异常不做处理（SecurityConstants.AGENT_ADD_USER这个URL拿不到clientId）
 			String[] clientInfos = new String[]{} ;
@@ -177,9 +178,9 @@ public class PigxRequestGlobalFilter implements GlobalFilter, Ordered {
 		}
 
 
-	}
+	}*/
 
-	private String parseUserNameFromReq(ServerHttpRequest request){
+	/*private String parseUserNameFromReq(ServerHttpRequest request){
 		String token = request.getHeaders().getFirst("Authorization");
 		if(!StringUtils.isEmpty(token)){
 			String userName = userService.queryUsername(SecurityConstants.FROM_IN, token);
@@ -189,7 +190,7 @@ public class PigxRequestGlobalFilter implements GlobalFilter, Ordered {
 		}
 
 		return request.getQueryParams().getFirst(KEY_QUERY_PARAM_USER_NAME);
-	}
+	}*/
 
 	@Override
 	public int getOrder() {

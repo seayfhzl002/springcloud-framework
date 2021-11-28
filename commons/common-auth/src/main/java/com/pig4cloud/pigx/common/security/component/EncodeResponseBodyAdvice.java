@@ -1,3 +1,5 @@
+
+/*
 package com.pig4cloud.pigx.common.security.component;
 
 import com.alibaba.fastjson.JSONObject;
@@ -21,12 +23,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import java.util.Base64;
 
+*/
 /**
  *
  * 对响应体进行加密
  * @author Administrator
  *
- */
+ *//*
+
 @ControllerAdvice
 @Slf4j
 public class EncodeResponseBodyAdvice implements ResponseBodyAdvice<Object> {
@@ -52,9 +56,11 @@ public class EncodeResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 					isEncrypt = false;
 				}
 				if(isEncrypt) {
-					/**
+					*/
+/**
 					 * 重写data，进行加密
-					 */
+					 *//*
+
 					resBody.setData(this.encode(resBody.getData()));
 				}
 			}
@@ -89,4 +95,4 @@ public class EncodeResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 		}
 	}
 
-}
+}*/

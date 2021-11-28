@@ -1,33 +1,30 @@
 package com.ehome.microservice;
 
+import com.pig4cloud.pigx.common.core.annotation.EnableFastJsonConverter;
+import com.pig4cloud.pigx.common.swagger.annotation.EnablePigxSwagger2;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//import com.netflix.appinfo.InstanceInfo;
-//import com.netflix.discovery.EurekaClient;
-
-@SpringBootApplication
-@RestController
+@EnablePigxSwagger2
+//@EnablePigxResourceServer
+@EnableAsync
+@SpringCloudApplication
+//@EnablePigxFeignClients
+@EnableFastJsonConverter
+@EnableTransactionManagement
+@EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)
+@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 public class Application {
-
-//	@Autowired
-//    private EurekaClient discoveryClient;
-	
-    @RequestMapping("/")
-    public String home() {
-    	String servieUrl = serviceUrl();
-        return servieUrl;
-    }
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-    }
-
-    public String serviceUrl() {
-//        InstanceInfo instance = discoveryClient.getNextServerFromEureka("eureka-client-01", false);
-//        return instance.getHomePageUrl();
-    	return null;
     }
 }

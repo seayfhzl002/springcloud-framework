@@ -5,10 +5,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.ehome.microservice</groupId>
-		<artifactId>microservice</artifactId>
-		<version>${revision}</version>
-		<relativePath>../</relativePath>
+		<groupId>com.ehome.fintech</groupId>
+		<artifactId>p2plending</artifactId>
+		<version>0.9.0.BUILD-SNAPSHOT</version>
+<!--		<relativePath>../</relativePath>-->
 	</parent>
 	<artifactId>biz-user</artifactId>
 	<packaging>jar</packaging>
@@ -18,16 +18,25 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<start-class>eurekademo.EurekaApplication</start-class>
 		<java.version>1.8</java.version>
 		<docker.image.prefix>springcloud</docker.image.prefix>
 	</properties>
 	
 	<dependencies>
 		<dependency>
-			<groupId>com.ehome.microservice</groupId>
+			<groupId>com.ehome.fintech</groupId>
 			<artifactId>common-test</artifactId>
-			<version>${revision}</version>
+			<version>0.9.0.BUILD-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ehome.fintech</groupId>
+			<artifactId>common-api</artifactId>
+			<version>0.9.0.BUILD-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ehome.fintech</groupId>
+			<artifactId>common-swagger</artifactId>
+			<version>0.9.0.BUILD-SNAPSHOT</version>
 		</dependency>
 		<!-- <dependency>
 			<groupId>org.springframework.security.oauth</groupId>
@@ -63,39 +72,46 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+			<version>2.2.6.RELEASE</version>
+		</dependency>
+		<!--配置中心客户端-->
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+			<version>2.2.6.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>5.2.1.RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+			<version>2.1.3.RELEASE</version>
+		</dependency>
 	</dependencies>
 
-	
+
 	<build>
-	    <defaultGoal>package</defaultGoal>
-	    <plugins>
-		<plugin>
-		    <groupId>org.apache.maven.plugins</groupId>
-		    <artifactId>maven-compiler-plugin</artifactId>
-		    <version>3.6.1</version>
-		    <configuration>
-		        <source>1.8</source>
-		        <target>1.8</target>
-		    </configuration>
-		</plugin>
-
-		<plugin>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-maven-plugin</artifactId>
-		    <configuration>
-		        <!-- 工程主入口-->
-		        <mainClass>com.ehome.microservice.Application</mainClass>
-		    </configuration>
-		    <executions>
-		        <execution>
-		            <goals>
-		                <goal>repackage</goal>
-		            </goals>
-		        </execution>
-		    </executions>
-		</plugin>
-
-	    </plugins>
-</build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.4.2</version>
+				<configuration><!--一般我们执行maven打包命令mvn package前maven会默认执行test命令 ,这里跳过测试-->
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

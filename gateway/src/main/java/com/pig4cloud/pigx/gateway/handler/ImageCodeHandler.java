@@ -1,3 +1,4 @@
+/*
 package com.pig4cloud.pigx.gateway.handler;
 
 import com.google.code.kaptcha.Producer;
@@ -23,11 +24,13 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+*/
 /**
  * @author
  * @date 2018/7/5
  * 验证码生成逻辑处理类
- */
+ *//*
+
 @Slf4j
 @Component
 @AllArgsConstructor
@@ -63,3 +66,4 @@ public class ImageCodeHandler implements HandlerFunction<ServerResponse> {
 				.body(BodyInserters.fromResource(new ByteArrayResource(os.toByteArray())));
 	}
 }
+*/

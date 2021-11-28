@@ -6,13 +6,15 @@ server:
 spring:
   application:
     name: biz-order
-
-security:
-  oauth2:
-    client:
-      client-id: client-check-token
-      client-secret: 123456
-      access-token-uri: http://localhost:5000/oauth/token
-      user-authorization-uri: http://localhost:5000/oauth/authorize
-    resource:
-      token-info-uri: http://localhost:5000/auth/oauth/check_token
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.1.56:8848
+        namespace: c0077cb0-e4fc-434c-aed5-5672b64b2993
+      config:
+        server-addr: 192.168.1.56:8848
+        namespace: c0077cb0-e4fc-434c-aed5-5672b64b2993
+        file-extension: yml
+        shared-dataids: application-redis,auth-server

@@ -8,3 +8,6 @@ target/
 .settings
 **/.settings
 **/.classpath
+*.iml
+.idea/
+logs/

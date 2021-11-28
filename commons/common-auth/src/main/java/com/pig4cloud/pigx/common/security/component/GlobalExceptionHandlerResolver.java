@@ -1,3 +1,5 @@
+
+/*
 package com.pig4cloud.pigx.common.security.component;
 
 import com.pig4cloud.pigx.common.core.constant.CommonConstants;
@@ -19,21 +21,25 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
 
+*/
 /**
  * @author
  * @date 2018/8/30
  * 全局异常处理器
- */
+ *//*
+
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandlerResolver {
 
-	/**
+	*/
+/**
 	 * 全局异常.
 	 *
 	 * @param e the e
 	 * @return R
-	 */
+	 *//*
+
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	public R handleGlobalException(Exception e) {
@@ -41,12 +47,14 @@ public class GlobalExceptionHandlerResolver {
 		return R.failed(null, ErrorCode.SYSTEM_ERROR.getMessage());
 	}
 
-	/**
+	*/
+/**
 	 * 校验异常.
 	 *
 	 * @param e the e
 	 * @return R
-	 */
+	 *//*
+
 	@ExceptionHandler(CheckedException.class)
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	public R handleCheckException(CheckedException e) {
@@ -54,12 +62,14 @@ public class GlobalExceptionHandlerResolver {
 		return R.failed(null, e.getMessage());
 	}
 
-	/**
+	*/
+/**
 	 * 业务异常.
 	 *
 	 * @param e the e
 	 * @return R
-	 */
+	 *//*
+
 	@ExceptionHandler(BizException.class)
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	public R handleBizException(BizException e) {
@@ -67,12 +77,14 @@ public class GlobalExceptionHandlerResolver {
 		return R.failed(e);
 	}
 
-	/**
+	*/
+/**
 	 * AccessDeniedException
 	 *
 	 * @param e the e
 	 * @return R
-	 */
+	 *//*
+
 	@ExceptionHandler(AccessDeniedException.class)
 	@ResponseStatus(HttpStatus.FORBIDDEN)
 	public R handleAccessDeniedException(AccessDeniedException e) {
@@ -83,12 +95,14 @@ public class GlobalExceptionHandlerResolver {
 		return R.failed(null, e.getLocalizedMessage());
 	}
 
-	/**
+	*/
+/**
 	 * validation Exception
 	 *
 	 * @param exception
 	 * @return R
-	 */
+	 *//*
+
 	@ExceptionHandler({MethodArgumentNotValidException.class, BindException.class})
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public R handleBodyValidException(MethodArgumentNotValidException exception) {
@@ -97,12 +111,14 @@ public class GlobalExceptionHandlerResolver {
 		return R.failed(null, fieldErrors.get(0).getDefaultMessage());
 	}
 
-	/**
+	*/
+/**
 	 * AnchorTokenException
 	 * 主播token失效
 	 * @param e the e
 	 * @return R
-	 */
+	 *//*
+
 	@ExceptionHandler(AnchorTokenException.class)
 	@ResponseStatus(HttpStatus.OK)
 	public R handleAccessDeniedException(AnchorTokenException e) {
@@ -110,3 +126,4 @@ public class GlobalExceptionHandlerResolver {
 		return R.failed(null, CommonConstants.TOKEN_FAIL,e.getMessage());
 	}
 }
+*/

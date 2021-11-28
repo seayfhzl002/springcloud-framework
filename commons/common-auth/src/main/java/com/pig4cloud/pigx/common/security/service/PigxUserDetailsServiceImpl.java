@@ -1,27 +1,13 @@
 package com.pig4cloud.pigx.common.security.service;
 
-import cn.hutool.core.util.ArrayUtil;
-/*import com.pig4cloud.pigx.admin.api.dto.UserInfo;
-import com.pig4cloud.pigx.admin.api.entity.SysUser;
-import com.pig4cloud.pigx.admin.api.entity.ZxUser;
-import com.pig4cloud.pigx.admin.api.feign.RemoteUserService;*/
-import com.pig4cloud.pigx.common.core.constant.CacheConstants;
-import com.pig4cloud.pigx.common.core.constant.CommonConstants;
-import com.pig4cloud.pigx.common.core.constant.SecurityConstants;
-import com.pig4cloud.pigx.common.core.util.R;
+/*import com.ehome.fintec.p2plending.common.api.RemoteUserService;
+import com.ehome.fintec.p2plending.common.dto.UserInfoDTO;*/
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.Cache;
-import org.springframework.cache.CacheManager;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import java.util.*;
-
-import javax.annotation.Resource;
 
 /**
  * 用户详细信息
@@ -29,12 +15,10 @@ import javax.annotation.Resource;
  * @author
  */
 @Slf4j
-//@AllArgsConstructor
+@AllArgsConstructor
 public class PigxUserDetailsServiceImpl implements PigxUserDetailsService {
-	/*private final RemoteUserService remoteUserService;*/
-	/*@Resource
-	private CacheManager cacheManager;
-*/
+//	private final RemoteUserService remoteUserService;
+
 	/**
 	 * 用户密码登录
 	 *
@@ -45,22 +29,14 @@ public class PigxUserDetailsServiceImpl implements PigxUserDetailsService {
 	@Override
 	@SneakyThrows
 	public UserDetails loadUserByUsername(String username) {
-		/*Cache cache = cacheManager.getCache(CacheConstants.USER_DETAILS);
-		if (cache != null && cache.get(username) != null) {
-			return (PigxUser) cache.get(username).get();
+		/*UserInfoDTO userInfo = remoteUserService.getByUserName(username);
+		if(userInfo == null){
+			return null;
 		}*/
-
-		/*R<UserInfo> result = null;
-		try {
-			result = remoteUserService.info(username, SecurityConstants.FROM_IN);
-			Optional.ofNullable(result.getData().getZxUser()).orElseThrow(() -> new UsernameNotFoundException("用户不存在"));
-		} catch (Exception e) {
-			throw new UsernameNotFoundException("用户不存在");
-		}
-		UserDetails userDetails = getUserDetails(result);
-		cache.put(username, userDetails);
-		return userDetails;*/
-		return null;
+//		PigxUser pigxUser = PigxUser.builder().build();
+		PigxUser user = new PigxUser(0L, username, "N_A", true
+				, true, true, true, null, 0L, 0L,0L,0L/*,tenantId*/);
+		return user;
 	}
 
 
@@ -84,7 +60,7 @@ public class PigxUserDetailsServiceImpl implements PigxUserDetailsService {
 	 * @param result 用户信息
 	 * @return
 	 */
-	private UserDetails getUserDetails(R<?> result) {
+//	private UserDetails getUserDetails(R<?> result) {
 		/*if (result == null || result.getData() == null) {
 			throw new UsernameNotFoundException("用户不存在");
 		}
@@ -111,6 +87,6 @@ public class PigxUserDetailsServiceImpl implements PigxUserDetailsService {
 				Optional.ofNullable(info.getZxUser()).map(ZxUser::getPrizeTeamRateDiscount).orElse(0),
 				Optional.ofNullable(info.getZxUser()).map(ZxUser::getLevelId).orElse(0L),
 				Optional.ofNullable(TenantContextHolder.getTenantId()).orElse(""));*/
-		return null;
-	}
+		/*return null;
+	}*/
 }

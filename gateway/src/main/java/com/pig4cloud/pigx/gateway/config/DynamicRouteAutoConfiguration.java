@@ -5,9 +5,9 @@ import com.pig4cloud.pigx.common.core.constant.CacheConstants;
 import com.pig4cloud.pigx.common.gateway.rule.MetadataAwareRule;*/
 import com.pig4cloud.pigx.gateway.filter.GrayLoadBalancerClientFilter;
 //import com.pig4cloud.pigx.gateway.support.RouteCacheHolder;
-import io.lettuce.core.ReadFrom;
+/*import io.lettuce.core.ReadFrom;
 import io.lettuce.core.cluster.ClusterClientOptions;
-import io.lettuce.core.cluster.ClusterTopologyRefreshOptions;
+import io.lettuce.core.cluster.ClusterTopologyRefreshOptions;*/
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -25,12 +25,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import org.springframework.data.redis.connection.RedisClusterConfiguration;
+/*import org.springframework.data.redis.connection.RedisClusterConfiguration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.listener.ChannelTopic;
-import org.springframework.data.redis.listener.RedisMessageListenerContainer;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;*/
 
 import java.time.Duration;
 
@@ -52,10 +52,10 @@ public class DynamicRouteAutoConfiguration {
 	/**
 	 * redis 监听配置
 	 *
-	 * @param redisConnectionFactory redis 配置
+	 * @param
 	 * @return
 	 */
-	@Bean
+/*	@Bean
 	public RedisMessageListenerContainer redisContainer(RedisConnectionFactory redisConnectionFactory) {
 		RedisMessageListenerContainer container
 				= new RedisMessageListenerContainer();
@@ -65,10 +65,10 @@ public class DynamicRouteAutoConfiguration {
 //			RouteCacheHolder.removeRouteList();
 		}, new ChannelTopic(CacheConstants.ROUTE_JVM_RELOAD_TOPIC));
 		return container;
-	}
+	}*/
 
 
-	@Bean
+	/*@Bean
 	@ConditionalOnProperty(value = "spring.redis.cluster.enable",havingValue = "true")
 	public LettuceConnectionFactory redisConnectionFactory(RedisProperties redisProperties) {
 		RedisClusterConfiguration redisClusterConfiguration = new RedisClusterConfiguration(redisProperties.getCluster().getNodes());
@@ -89,7 +89,7 @@ public class DynamicRouteAutoConfiguration {
 				.clientOptions(clusterClientOptions).build();
 
 		return new LettuceConnectionFactory(redisClusterConfiguration, lettuceClientConfiguration);
-	}
+	}*/
 
 
 	@Bean

@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
+import com.pig4cloud.pigx.common.core.annotation.Inner;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
@@ -17,8 +18,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
-import com.pig4cloud.pigx.common.core.constant.CommonConstants;
-import com.pig4cloud.pigx.common.security.annotation.Inner;
+//import com.pig4cloud.pigx.common.security.annotation.Inner;
 
 import cn.hutool.core.util.ReUtil;
 import lombok.Getter;
@@ -37,6 +37,8 @@ import lombok.extern.slf4j.Slf4j;
 @ConfigurationProperties(prefix = "security.oauth2.client")
 public class PermitAllUrlProperties implements InitializingBean {
 	private static final Pattern PATTERN = Pattern.compile("\\{(.*?)\\}");
+	private static final String ASTERISK = "*";
+
 	@Autowired
 	private WebApplicationContext applicationContext;
 
@@ -56,13 +58,13 @@ public class PermitAllUrlProperties implements InitializingBean {
 			Inner method = AnnotationUtils.findAnnotation(handlerMethod.getMethod(), Inner.class);
 			Optional.ofNullable(method)
 					.ifPresent(inner -> info.getPatternsCondition().getPatterns()
-							.forEach(url -> ignoreUrls.add(ReUtil.replaceAll(url, PATTERN, CommonConstants.ASTERISK))));
+							.forEach(url -> ignoreUrls.add(ReUtil.replaceAll(url, PATTERN, ASTERISK))));
 
 			// 获取类上边的注解, 替代path variable 为 *
 			Inner controller = AnnotationUtils.findAnnotation(handlerMethod.getBeanType(), Inner.class);
 			Optional.ofNullable(controller)
 					.ifPresent(inner -> info.getPatternsCondition().getPatterns()
-							.forEach(url -> ignoreUrls.add(ReUtil.replaceAll(url, PATTERN, CommonConstants.ASTERISK))));
+							.forEach(url -> ignoreUrls.add(ReUtil.replaceAll(url, PATTERN, ASTERISK))));
 		});
 
 	}

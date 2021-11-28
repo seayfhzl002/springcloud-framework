@@ -1,5 +1,6 @@
 package com.pig4cloud.pigx.common.security.service;
 
+import lombok.Builder;
 import lombok.Getter;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,6 +13,7 @@ import java.util.Collection;
  * @date 2018/8/20
  * 扩展用户信息
  */
+//@Builder
 public class PigxUser extends User {
 	/**
 	 * 用户ID
@@ -48,7 +50,14 @@ public class PigxUser extends User {
 	 * @throws IllegalArgumentException if a <code>null</code> value was passed either as
 	 *                                  a parameter or as an element in the <code>GrantedAuthority</code> collection
 	 */
-	public PigxUser(Long id, String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities,
+	public PigxUser(Long id,
+					String username,
+					String password,
+					boolean enabled,
+					boolean accountNonExpired,
+					boolean credentialsNonExpired,
+					boolean accountNonLocked,
+					Collection<? extends GrantedAuthority> authorities,
 					long prizeTeamId,
 					long prizeTeamReturnPoint,
 					long prizeTeamRateDiscount,
