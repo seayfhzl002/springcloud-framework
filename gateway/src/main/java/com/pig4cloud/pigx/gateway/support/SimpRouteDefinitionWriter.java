@@ -1,30 +1,32 @@
-/*package com.pig4cloud.pigx.gateway.support;
+package com.pig4cloud.pigx.gateway.support;
 
 import com.pig4cloud.pigx.gateway.config.RouteConfig;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionRepository;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-*//**
- * @author
+/**
+ * @author 1
  * @date 2018/10/31
  * <p>
  * redis 保存路由信息，优先级比配置文件高
- *//*
+ */
 @Slf4j
 @Component
 @AllArgsConstructor
 public class SimpRouteDefinitionWriter implements RouteDefinitionRepository {
-
-	private final RouteConfig routeConfig;
+	@Autowired
+	private RouteConfig routeConfig;
 
 
 	@Override
 	public Flux<RouteDefinition> getRouteDefinitions() {
+		log.info("route config {}", routeConfig);
 		return Flux.fromIterable(routeConfig.getList());
 	}
 
@@ -38,4 +40,3 @@ public class SimpRouteDefinitionWriter implements RouteDefinitionRepository {
 		return null;
 	}
 }
-*/

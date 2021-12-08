@@ -3,10 +3,15 @@ package com.pig4cloud.pigx.common.security.component;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDecisionVoter;
@@ -14,20 +19,21 @@ import org.springframework.security.access.vote.AuthenticatedVoter;
 import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.access.vote.UnanimousBased;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
+import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.expression.OAuth2WebSecurityExpressionHandler;
 import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.UserAuthenticationConverter;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.access.expression.WebExpressionVoter;
-import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.filter.CompositeFilter;
 
-import com.ehome.microservice.auth.config.resource.AppFilterInvocationSecurityMetadataSource;
-import com.ehome.microservice.auth.config.resource.RoleBasedVoter;
+import javax.servlet.Filter;
 
 /**
  * @author
@@ -45,8 +51,7 @@ public class PigxResourceServerConfigurerAdapter extends ResourceServerConfigure
 	@Autowired
 	private PermitAllUrlProperties permitAllUrlProperties;
 	@Autowired
-	private RestTemplate lbRestTemplate;	
-
+	private RestTemplate lbRestTemplate;
 	/**
 	 * 配置权限检查有2种方式:
 	 * 1,通过 accessDecisionManager
@@ -69,7 +74,11 @@ public class PigxResourceServerConfigurerAdapter extends ResourceServerConfigure
 			.and().csrf().disable();*/
 		http.authorizeRequests()
 		.antMatchers("/orders/**").hasRole("MANAGER")
+		.antMatchers("/users/**").hasRole("MANAGER")
+		.antMatchers("/tokens/**").hasAuthority("scope_token_check")
 		.accessDecisionManager(accessDecisionManager())
+		.and()
+		.addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
 		
 		/*.withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
         @Override
@@ -91,8 +100,7 @@ public class PigxResourceServerConfigurerAdapter extends ResourceServerConfigure
 
 		remoteTokenServices.setRestTemplate(lbRestTemplate);
 		remoteTokenServices.setAccessTokenConverter(accessTokenConverter);
-		resources.authenticationEntryPoint(resourceAuthExceptionEntryPoint)
-				.tokenServices(remoteTokenServices);
+		resources.authenticationEntryPoint(resourceAuthExceptionEntryPoint).tokenServices(remoteTokenServices);
 		resources.expressionHandler(oauthExpressionHandler());
 	}
 	
@@ -106,15 +114,57 @@ public class PigxResourceServerConfigurerAdapter extends ResourceServerConfigure
         return new UnanimousBased(decisionVoters);
     }
     
-    @Bean
+    /*@Bean
     public AppFilterInvocationSecurityMetadataSource mySecurityMetadataSource(FilterInvocationSecurityMetadataSource filterInvocationSecurityMetadataSource) {
         AppFilterInvocationSecurityMetadataSource securityMetadataSource = new AppFilterInvocationSecurityMetadataSource(filterInvocationSecurityMetadataSource);
         return securityMetadataSource;
-    }
+    }*/
     
     @Bean
     public DefaultWebSecurityExpressionHandler oauthExpressionHandler() {
     	DefaultWebSecurityExpressionHandler securityMetadataSource = new DefaultWebSecurityExpressionHandler();
         return securityMetadataSource;
     }
+
+	@Bean
+	@ConfigurationProperties("github")
+	public ClientResources github() {
+		return new ClientResources();
+	}
+	private Filter ssoFilter() {
+		CompositeFilter filter = new CompositeFilter();
+		List<Filter> filters = new ArrayList<>();
+		filters.add(ssoFilter(github(), "/login/github"));
+		filter.setFilters(filters);
+		return filter;
+	}
+
+	private Filter ssoFilter(ClientResources client, String path) {
+		OAuth2ClientAuthenticationProcessingFilter oAuth2ClientAuthenticationFilter = new OAuth2ClientAuthenticationProcessingFilter(path);
+		OAuth2RestTemplate oAuth2RestTemplate = new OAuth2RestTemplate(client.getClient());
+		oAuth2ClientAuthenticationFilter.setRestTemplate(oAuth2RestTemplate);
+		UserInfoTokenServices tokenServices = new UserInfoTokenServices(client.getResource().getUserInfoUri(),
+				client.getClient().getClientId());
+		tokenServices.setRestTemplate(oAuth2RestTemplate);
+		oAuth2ClientAuthenticationFilter.setTokenServices(tokenServices);
+		return oAuth2ClientAuthenticationFilter;
+	}
+
+}
+
+class ClientResources {
+
+	@NestedConfigurationProperty
+	private AuthorizationCodeResourceDetails client = new AuthorizationCodeResourceDetails();
+
+	@NestedConfigurationProperty
+	private ResourceServerProperties resource = new ResourceServerProperties();
+
+	public AuthorizationCodeResourceDetails getClient() {
+		return client;
+	}
+
+	public ResourceServerProperties getResource() {
+		return resource;
+	}
 }

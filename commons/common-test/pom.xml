@@ -81,7 +81,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					&lt;!&ndash; 工程主入口 &ndash;&gt;
-					<mainClass>com.ehome.microservice.Application</mainClass>
+					<mainClass>Application</mainClass>
 				</configuration>
 				<executions>
 					<execution>

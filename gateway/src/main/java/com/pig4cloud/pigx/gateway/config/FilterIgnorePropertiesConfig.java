@@ -17,7 +17,7 @@ import java.util.List;
 @Data
 @Configuration
 @RefreshScope
-@ConditionalOnExpression("!'${ignore}'.isEmpty()")
+//@ConditionalOnExpression("!'${ignore}'.isEmpty()")
 @ConfigurationProperties(prefix = "ignore")
 public class FilterIgnorePropertiesConfig {
 	private List<String> clients = new ArrayList<>();

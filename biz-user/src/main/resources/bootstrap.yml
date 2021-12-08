@@ -1,7 +1,7 @@
 server:
   port: 8085
-  servlet:
-    context-path: /biz-user
+#  servlet:
+#    context-path: /biz-user
 
 spring:
   application:

@@ -10,11 +10,11 @@
 		<version>0.9.0.BUILD-SNAPSHOT</version>
 <!--		<relativePath>../</relativePath>-->
 	</parent>
-	<artifactId>biz-user</artifactId>
+	<artifactId>resource-server</artifactId>
 	<packaging>jar</packaging>
 	
-	<name>bisuness User</name>
-	<description>bisuness User</description>
+	<name>resource-server</name>
+	<description>client to auth server and resource server</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,26 +23,16 @@
 	</properties>
 	
 	<dependencies>
-		<dependency>
+		<!--<dependency>
 			<groupId>com.ehome.fintech</groupId>
 			<artifactId>common-test</artifactId>
 			<version>0.9.0.BUILD-SNAPSHOT</version>
-		</dependency>
+		</dependency>-->
 		<dependency>
-			<groupId>com.ehome.fintech</groupId>
-			<artifactId>common-api</artifactId>
-			<version>0.9.0.BUILD-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ehome.fintech</groupId>
-			<artifactId>common-swagger</artifactId>
-			<version>0.9.0.BUILD-SNAPSHOT</version>
-		</dependency>
-		<!--<dependency>
 			<groupId>com.ehome.fintech</groupId>
 			<artifactId>common-auth</artifactId>
 			<version>0.9.0.BUILD-SNAPSHOT</version>
-		</dependency>-->
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -62,12 +52,11 @@
 			<version> 1.1.0 </version><!--$NO-MVN-MAN-VER$ -->
 			<scope>test</scope>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>org.httpunit</groupId>
 			<artifactId>httpunit</artifactId>
-			<version>${httpunit-version}</version>
 			<scope>test</scope>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -108,7 +97,8 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.4.2</version>
-				<configuration><!--一般我们执行maven打包命令mvn package前maven会默认执行test命令 ,这里跳过测试-->
+				<configuration>
+					<!--一般我们执行maven打包命令mvn package前maven会默认执行test命令 ,这里跳过测试-->
 					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>

@@ -1,11 +1,11 @@
 server:
-  port: 5000
+  port: 5001
 #  servlet:
-#    context-path: /auth
-    
+#    context-path: /resource-server
+
 spring:
   application:
-    name: auth-server
+    name: resource-server
   profiles:
     active: dev
   cloud:
@@ -17,4 +17,4 @@ spring:
         server-addr: 192.168.1.56:8848
         namespace: c0077cb0-e4fc-434c-aed5-5672b64b2993
         file-extension: yml
-        shared-dataids: application-redis,auth-server
+        shared-dataids: application-resource-server.yml, common-security.yml

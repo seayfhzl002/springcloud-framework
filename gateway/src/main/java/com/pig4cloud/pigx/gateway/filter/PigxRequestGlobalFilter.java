@@ -2,6 +2,7 @@ package com.pig4cloud.pigx.gateway.filter;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
+import com.ehome.fintec.p2plending.common.api.RemoteAuthClientService;
 import com.ehome.fintec.p2plending.common.api.RemoteIPLimitService;
 import com.ehome.fintec.p2plending.common.api.RemoteUserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -54,6 +55,9 @@ public class PigxRequestGlobalFilter implements GlobalFilter, Ordered {
 	private RemoteUserService userService;
 
 	@Autowired
+	private RemoteAuthClientService authClient;
+
+	@Autowired
 	private ObjectMapper objectMapper;
 
 	@Autowired
@@ -81,6 +85,15 @@ public class PigxRequestGlobalFilter implements GlobalFilter, Ordered {
 			.build();
 
 		try{
+			if(!StringUtils.isEmpty(request.getHeaders().getFirst("Authorization"))){
+				try{
+					authClient.tokenCheck(request.getHeaders().getFirst("Authorization"));
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+//				authClient.tokenCheck(request.getHeaders().getFirst("Authorization"));
+			}
+
 //			String userName = parseUserNameFromReq(request);
 			String userName = null;
 			if(StrUtil.isEmpty(userName) || !userName.contains(KEY_QUERY_PARAM_ADMIN)){

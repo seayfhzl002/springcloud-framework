@@ -1,0 +1,19 @@
+server:
+  port: 8085
+  servlet:
+    context-path: /biz-user
+
+spring:
+  application:
+    name: biz-user
+
+security:
+  oauth2:
+    client:
+      client-id: user
+      client-secret: 123456
+      user-authorization-uri: http://localhost:8083/sso-auth/oauth/authorize
+      access-token-uri: http://localhost:8083/sso-auth/oauth/token
+    resource:
+      jwt:
+        key-uri: http://localhost:8083/sso-auth/oauth/token_key

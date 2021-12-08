@@ -22,4 +22,9 @@ public interface ServiceNameConstants {
 	 */
 	String USER_SERVICE = "biz-user";
 
+	/**
+	 * resource server 服务
+	 */
+	String RESOURCE_SERVER_SERVICE = "resource-server";
+
 }
